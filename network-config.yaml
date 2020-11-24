@@ -1,0 +1,105 @@
+---
+name: "test-1"
+x-type: "hlfv1"
+description: "connection test"
+version: "1.0"
+
+user: "anyblock"
+channel: "econt-channel"
+chaincode: "econt_chaincode"
+
+client:
+  organization:
+    - Org1
+  connection:
+    timeout:
+      peer:
+        endorser:
+          - 300
+        eventHub: 60
+        eventReg: 3
+      orderer:
+        - 300
+    options:
+      grpc.keepalive_timeout_ms: 180000
+
+channels:
+  econt-channel:
+    orderers:
+      - orderer0.econt.com
+      - orderer1.econt.com
+      - orderer2.econt.com
+
+    peers:
+      peer0.leader.econt.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.leader.econt.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer2.leader.econt.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+    chaincodes:
+      - econt_chaincode
+
+organizations:
+  Org1:
+    mspid: leader-5605846958664MSP
+    peers:
+      - peer0.leader.econt.com
+      - peer1.leader.econt.com
+      - peer2.leader.econt.com
+
+orderers:
+  orderer0.econt.com:
+    url: grpcs://orderer0.econt.com:8050
+    grpcOptions:
+      ssl-target-name-override: orderer0.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_orderer0.econt.com.crt
+
+  orderer1.econt.com:
+    url: grpcs://orderer1.econt.com:9050
+    grpcOptions:
+      ssl-target-name-override: orderer1.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_orderer1.econt.com.crt
+
+  orderer2.econt.com:
+    url: grpcs://orderer2.econt.com:10050
+    grpcOptions:
+      ssl-target-name-override: orderer2.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_orderer2.econt.com.crt
+
+peers:
+  peer0.leader.econt.com:
+    url: grpcs://peer0.leader.econt.com:8051
+    grpcOptions:
+      ssl-target-name-override: peer0.leader.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_peer0.leader.econt.com.crt
+
+  peer1.leader.econt.com:
+    url: grpcs://peer1.leader.econt.com:9051
+    grpcOptions:
+      ssl-target-name-override: peer1.leader.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_peer1.leader.econt.com.crt
+
+  peer2.leader.econt.com:
+    url: grpcs://peer2.leader.econt.com:10051
+    grpcOptions:
+      ssl-target-name-override: peer2.leader.econt.com
+    tlsCACerts:
+      path: artifacts/anyblock_tls-cert_peer2.leader.econt.com.crt
