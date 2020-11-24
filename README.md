@@ -9,3 +9,5 @@ REST API SERVER with Node.js, Express and Squelize for hyperledger fabric networ
 
 ####1. Enter the command
 npm install (in project path)
+
+server has a security as use jwt token, login door.
